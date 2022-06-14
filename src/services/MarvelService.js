@@ -10,7 +10,7 @@ class MarvelService {
     }
 
     getAllCharacters = () => {
-        return this.getRecource('https://gateway.marvel.com:443/v1/public/characters?apikey=f65f5a21349dce7531dd6bd0db9e3868')
+        return this.getRecource('https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=210&apikey=f65f5a21349dce7531dd6bd0db9e3868')
     }
 }
 
