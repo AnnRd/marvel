@@ -79,10 +79,6 @@ const View = ({character}) => {
     const {name, description, thumbnail, homepage, wiki} = character;
     const notAvailableImg = thumbnail.includes('image_not_available');
 
-    if (notAvailableImg) {
-
-    }
-
     return (
         <div className="randomchar__block">
                     <img src={thumbnail} alt="Random character" style={{objectFit: notAvailableImg ? 'contain' : 'cover'}} className="randomchar__img"/>
