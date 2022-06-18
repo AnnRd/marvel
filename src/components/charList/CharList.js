@@ -45,6 +45,12 @@ class CharList extends Component{
             if (obj.thumbnail.includes('image_not_available')) {
                 imgStyle = {'objectFit' : 'unset'};
             }
+            console.log(imgStyle);
+
+            // const notAvailableImg = obj.thumbnail.includes('image_not_available');
+
+            //  в стиле у li - style={{objectFit: notAvailableImg ? 'unset' : 'cover'}}
+            // console.log(notAvailableImg);
 
             return (
                 <li className="char__item char__item_selected" key={obj.id} style={imgStyle}>
