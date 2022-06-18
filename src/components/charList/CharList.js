@@ -11,6 +11,7 @@ class CharList extends Component{
         loading: true,
         error: false,
         newItemsLoading: false,
+        offset: 210,
     };
 
     marvelService = new MarvelService();
@@ -35,10 +36,11 @@ class CharList extends Component{
     }
 
     onCharLoaded = (newCharList) => {
-        this.setState( ({charList}) => ({
+        this.setState( ({charList, offset}) => ({
             charList: [...charList, ...newCharList],  //развернула старый массив персонажей и за ним добавила новый. При первичной загрузке charlist - пустой массив
             loading: false,
             newItemsLoading: false,
+            offset: offset + 9,
         }))
     }
 
@@ -77,7 +79,7 @@ class CharList extends Component{
     
 
     render() {
-        const {charList, loading, error} = this.state;
+        const {charList, loading, error, newItemsLoading, offset} = this.state;
         
         const items = this.renderCharacters(charList);
 
@@ -90,7 +92,10 @@ class CharList extends Component{
                     {content}
                     {spinner}
                     {errorMessage}
-                <button className="button button__main button__long">
+                <button
+                className="button button__main button__long"
+                disabled={newItemsLoading}
+                onClick={() => {this.onRequest(offset)}}>
                     <div className="inner">load more</div>
                 </button>
             </div>
