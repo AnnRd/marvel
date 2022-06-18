@@ -10,26 +10,36 @@ class CharList extends Component{
         charList: [],
         loading: true,
         error: false,
+        newItemsLoading: false,
     };
 
     marvelService = new MarvelService();
 
     componentDidMount() {
-        this.onRequest();
+        this.onRequest(); //запускается и при первичной загрузке => аргумента нет и метод ориенируется на _baseOffset в MarvelService
     }
 
     onRequest = (offset) => {
+        this.onCharListLoading();
+
         this.marvelService
             .getAllCharacters(offset)
             .then(this.onCharLoaded)
             .catch(this.onError)
     }
 
-    onCharLoaded = (charList) => {
+    onCharListLoading = () => {
         this.setState({
-            charList, 
-            loading: false
+            newItemsLoading: true
         })
+    }
+
+    onCharLoaded = (newCharList) => {
+        this.setState( ({charList}) => ({
+            charList: [...charList, ...newCharList],  //развернула старый массив персонажей и за ним добавила новый. При первичной загрузке charlist - пустой массив
+            loading: false,
+            newItemsLoading: false,
+        }))
     }
 
     onError = () => {
