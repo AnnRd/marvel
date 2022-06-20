@@ -15,6 +15,7 @@ class CharList extends Component{
         newItemsLoading: false,
         offset: 210,
         charListEnd: false,
+        selected: null
     };
 
     marvelService = new MarvelService();
@@ -60,22 +61,33 @@ class CharList extends Component{
         })
     }
 
+    handleClick = ()  => {
+        this.setState({
+          selected: this.props.charId
+        })
+      }
+
     renderCharacters(arr) {
-        const characters = arr.map(obj => {
+        const characters = arr.map( obj => {
             let imgStyle = {'objectFit' : 'cover'};
             if (obj.thumbnail.includes('image_not_available')) {
                 imgStyle = {'objectFit' : 'unset'};
-            }
+            }            
+
+            let selectedClass = 'char__item  char__item_selected'
 
             return (
                 <li
-                className="char__item char__item_selected"
+                className={this.props.charId === obj.id ? selectedClass : 'char__item'}
                 key={obj.id}
-                onClick={() => this.props.onCharSelected(obj.id)}>
+                onClick={() => {
+                    this.handleClick();
+                    this.props.onCharSelected(obj.id)
+                }}>
                     <img src={obj.thumbnail} alt={obj.name}  style={imgStyle}/>
                     <div className="char__name">{obj.name}</div>
                 </li>
-            ) //  УБРАТЬ АКТИВНЫЙ СТИЛЬ - безз него класс char__item
+            )
             
         });
 
