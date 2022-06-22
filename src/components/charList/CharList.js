@@ -15,7 +15,7 @@ class CharList extends Component{
         newItemsLoading: false,
         offset: 210,
         charListEnd: false,
-        selected: null
+        selected: null,
     };
 
     marvelService = new MarvelService();
