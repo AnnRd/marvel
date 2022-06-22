@@ -74,7 +74,7 @@ class CharList extends Component{
                 imgStyle = {'objectFit' : 'unset'};
             }            
 
-            let selectedClass = 'char__item  char__item_selected'
+            let selectedClass = 'char__item  char__item_selected';
 
             return (
                 <li
